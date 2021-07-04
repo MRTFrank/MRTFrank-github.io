@@ -633,7 +633,7 @@ setInterval("createtime()",250);
   
   <script type="text/javascript">
     var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick,mail';
     guest = guest.split(',').filter(item=>{
       return GUEST.indexOf(item)>-1;
     });
@@ -643,10 +643,10 @@ setInterval("createtime()",250);
         notify: false,
         appId: 'wP6SICEifS2ACUzAS0y6pvU4-gzGzoHsz',
         appKey: 'uk4ycsx9x3KDhKMthdaHKhig',
-        placeholder: 'Just go go',
+        placeholder: '你想说点什么吗？',
         avatar:'mm',
         guest_info:guest,
-        pageSize:'10' || 10,
+        pageSize:'8' || 10,
     });
   </script>
 
