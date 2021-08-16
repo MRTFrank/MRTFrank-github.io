@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="多线程," />
 
 
 
@@ -79,16 +79,17 @@
 
 
 
-<meta name="description" content="Hi,你好啊！">
+<meta name="description" content="使用synchronized 。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="交替打印ABC">
 <meta property="og:url" content="http://abina.fun/2021/08/16/%E4%BA%A4%E6%9B%BF%E6%89%93%E5%8D%B0ABC/index.html">
 <meta property="og:site_name" content="Frank&#39; Home">
-<meta property="og:description" content="Hi,你好啊！">
+<meta property="og:description" content="使用synchronized 。">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-08-16T03:12:37.000Z">
-<meta property="article:modified_time" content="2021-08-16T03:12:37.832Z">
+<meta property="article:modified_time" content="2021-08-16T03:20:05.861Z">
 <meta property="article:author" content="Abina">
+<meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
 
 
@@ -355,7 +356,12 @@
       
 
       
-        
+        <p>使用synchronized 。</p>
+<span id="more"></span>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> mutilThread;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span>: zhaobin</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2021/8/16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ABC_Sych</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        Object a = <span class="keyword">new</span> Object();</span><br><span class="line">        Object b = <span class="keyword">new</span> Object();</span><br><span class="line">        Object c = <span class="keyword">new</span> Object();</span><br><span class="line"></span><br><span class="line">        MutilThread t1 = <span class="keyword">new</span> MutilThread(<span class="string">&quot;A&quot;</span>,c,a);</span><br><span class="line">        MutilThread t2 = <span class="keyword">new</span> MutilThread(<span class="string">&quot;B&quot;</span>,a,b);</span><br><span class="line">        MutilThread t3 = <span class="keyword">new</span> MutilThread(<span class="string">&quot;C&quot;</span>,b,c);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(t1).start();</span><br><span class="line">        Thread.sleep(<span class="number">10</span>);</span><br><span class="line">        <span class="keyword">new</span> Thread(t2).start();</span><br><span class="line">        Thread.sleep(<span class="number">10</span>);</span><br><span class="line">        <span class="keyword">new</span> Thread(t3).start();</span><br><span class="line">        Thread.sleep(<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MutilThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line">        <span class="keyword">private</span> Object pre;</span><br><span class="line">        <span class="keyword">private</span> Object cur;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MutilThread</span><span class="params">(String name, Object pre, Object cur)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.name = name;</span><br><span class="line">            <span class="keyword">this</span>.pre = pre;</span><br><span class="line">            <span class="keyword">this</span>.cur = cur;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">10</span>;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span>(count &gt;<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (pre)&#123;</span><br><span class="line">                    <span class="keyword">synchronized</span> (cur)&#123;</span><br><span class="line">                        System.out.println(name + <span class="string">&quot;:&quot;</span>+(<span class="number">11</span>-count));</span><br><span class="line">                        count--;</span><br><span class="line">                        <span class="comment">//代码块执行完释放cur锁</span></span><br><span class="line">                        cur.notifyAll();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">try</span>&#123;</span><br><span class="line">                        <span class="keyword">if</span>(count == <span class="number">0</span>)&#123;</span><br><span class="line">                            pre.notifyAll();</span><br><span class="line">                        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                            pre.wait();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</span><br><span class="line">                        System.out.println(e);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     
@@ -369,6 +375,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"># 多线程</a>
+          
+        </div>
       
 
       
@@ -484,7 +496,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
