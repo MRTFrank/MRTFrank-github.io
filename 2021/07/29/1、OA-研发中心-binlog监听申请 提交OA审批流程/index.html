@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="binlog监听接入指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Frank&#39; Home">
+<meta property="og:url" content="http://abina.fun/2021/07/29/1%E3%80%81OA-%E7%A0%94%E5%8F%91%E4%B8%AD%E5%BF%83-binlog%E7%9B%91%E5%90%AC%E7%94%B3%E8%AF%B7%20%E6%8F%90%E4%BA%A4OA%E5%AE%A1%E6%89%B9%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Frank&#39; Home">
+<meta property="og:description" content="binlog监听接入指南">
+<meta property="og:locale">
+<meta property="og:image" content="https://access.feishu.cn/space/api/box/stream/download/asynccode/?code=YjJlZTZmZTg3MjY3OTc1MDJkOTJhOTg0N2U0NjA1MmRfUFBYOU5DbGVGRjNDeWdDSU5GQXI1Q3BFUFgwNVo0NnlfVG9rZW46Ym94Y25MWW5oT2l2VFVhbWdkejFab2dVeGhoXzE2Mjc1NDkzNzM6MTYyNzU1Mjk3M19WNA">
+<meta property="article:published_time" content="2021-07-29T09:04:03.009Z">
+<meta property="article:modified_time" content="2021-08-10T03:27:24.378Z">
+<meta property="article:author" content="Abina">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://access.feishu.cn/space/api/box/stream/download/asynccode/?code=YjJlZTZmZTg3MjY3OTc1MDJkOTJhOTg0N2U0NjA1MmRfUFBYOU5DbGVGRjNDeWdDSU5GQXI1Q3BFUFgwNVo0NnlfVG9rZW46Ym94Y25MWW5oT2l2VFVhbWdkejFab2dVeGhoXzE2Mjc1NDkzNzM6MTYyNzU1Mjk3M19WNA">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://abina.fun/2021/07/29/1、OA-研发中心-binlog监听申请 提交OA审批流程/"/>
+
+
+
+
+
+  <title> | Frank' Home</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Frank' Home</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://abina.fun/2021/07/29/1%E3%80%81OA-%E7%A0%94%E5%8F%91%E4%B8%AD%E5%BF%83-binlog%E7%9B%91%E5%90%AC%E7%94%B3%E8%AF%B7%20%E6%8F%90%E4%BA%A4OA%E5%AE%A1%E6%89%B9%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar1.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Frank' Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-29T17:04:03+08:00">
+                2021-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/07/29/1%E3%80%81OA-%E7%A0%94%E5%8F%91%E4%B8%AD%E5%BF%83-binlog%E7%9B%91%E5%90%AC%E7%94%B3%E8%AF%B7%20%E6%8F%90%E4%BA%A4OA%E5%AE%A1%E6%89%B9%E6%B5%81%E7%A8%8B/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/07/29/1%E3%80%81OA-%E7%A0%94%E5%8F%91%E4%B8%AD%E5%BF%83-binlog%E7%9B%91%E5%90%AC%E7%94%B3%E8%AF%B7%20%E6%8F%90%E4%BA%A4OA%E5%AE%A1%E6%89%B9%E6%B5%81%E7%A8%8B/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/07/29/1%E3%80%81OA-%E7%A0%94%E5%8F%91%E4%B8%AD%E5%BF%83-binlog%E7%9B%91%E5%90%AC%E7%94%B3%E8%AF%B7%20%E6%8F%90%E4%BA%A4OA%E5%AE%A1%E6%89%B9%E6%B5%81%E7%A8%8B/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>binlog监听接入指南</p>
+<span id="more"></span>
+
+<h3 id="1、OA-gt-研发中心-gt-binlog监听申请-提交OA审批流程"><a href="#1、OA-gt-研发中心-gt-binlog监听申请-提交OA审批流程" class="headerlink" title="1、OA-&gt;研发中心-&gt;binlog监听申请 提交OA审批流程"></a>1、OA-&gt;研发中心-&gt;binlog监听申请 提交OA审批流程</h3><p>是否需要监听DDL</p>
+<p>需要监听的字段，如果不提供，默认表内所有字段都监听</p>
+<p><img src="https://access.feishu.cn/space/api/box/stream/download/asynccode/?code=YjJlZTZmZTg3MjY3OTc1MDJkOTJhOTg0N2U0NjA1MmRfUFBYOU5DbGVGRjNDeWdDSU5GQXI1Q3BFUFgwNVo0NnlfVG9rZW46Ym94Y25MWW5oT2l2VFVhbWdkejFab2dVeGhoXzE2Mjc1NDkzNzM6MTYyNzU1Mjk3M19WNA" alt="img"></p>
+<h3 id="2、监听分配的topic即可"><a href="#2、监听分配的topic即可" class="headerlink" title="2、监听分配的topic即可"></a>2、监听分配的topic即可</h3><p>数据格式</p>
+<h4 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    &quot;data&quot;: &#123;</span><br><span class="line"></span><br><span class="line">        &quot;end_at&quot;: &quot;2021-02-28 23:59:59&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;updated_at&quot;: &quot;2021-02-23 11:24:54&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;user_id&quot;: &quot;8078089&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;created_at&quot;: &quot;2021-02-23 11:24:54&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;promotion_id&quot;: &quot;10321&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;id&quot;: &quot;51068963&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;start_at&quot;: &quot;2021-02-19 10:00:00&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;id_code&quot;: &quot;8278089&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;status&quot;: &quot;0&quot;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &quot;database&quot;: &quot;abmau&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;es&quot;: 1614050694000,</span><br><span class="line"></span><br><span class="line">    &quot;isDdl&quot;: false,</span><br><span class="line"></span><br><span class="line">    &quot;pkNames&quot;: [</span><br><span class="line"></span><br><span class="line">        &quot;id&quot;</span><br><span class="line"></span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    &quot;sqlType&quot;: &#123;</span><br><span class="line"></span><br><span class="line">        &quot;promotion_id&quot;: 4,</span><br><span class="line"></span><br><span class="line">        &quot;distribution_id&quot;: 4,</span><br><span class="line"></span><br><span class="line">        &quot;id_code&quot;: 4,</span><br><span class="line"></span><br><span class="line">        &quot;user_id&quot;: 4,</span><br><span class="line"></span><br><span class="line">        &quot;status&quot;: -7,</span><br><span class="line"></span><br><span class="line">        &quot;start_at&quot;: 93,</span><br><span class="line"></span><br><span class="line">        &quot;end_at&quot;: 93,</span><br><span class="line"></span><br><span class="line">        &quot;created_at&quot;: 93,</span><br><span class="line"></span><br><span class="line">        &quot;updated_at&quot;: 93,</span><br><span class="line"></span><br><span class="line">        &quot;deleted_at&quot;: 93,</span><br><span class="line"></span><br><span class="line">        &quot;id&quot;: 4</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &quot;table&quot;: &quot;w_promotion_user&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;ts&quot;: 1614050694034,</span><br><span class="line"></span><br><span class="line">    &quot;type&quot;: &quot;INSERT&quot;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    &quot;data&quot;: &#123;</span><br><span class="line"></span><br><span class="line">        &quot;name&quot;: &quot;gfsda&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;id&quot;: &quot;19&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;desc&quot;: &quot;dsadasd&quot;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &quot;database&quot;: &quot;abm_test&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;es&quot;: 1614051395000,</span><br><span class="line"></span><br><span class="line">    &quot;isDdl&quot;: false,</span><br><span class="line"></span><br><span class="line">    &quot;pkNames&quot;: [</span><br><span class="line"></span><br><span class="line">        &quot;id&quot;</span><br><span class="line"></span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    &quot;sqlType&quot;: &#123;</span><br><span class="line"></span><br><span class="line">        &quot;name&quot;: 12,</span><br><span class="line"></span><br><span class="line">        &quot;desc&quot;: 12,</span><br><span class="line"></span><br><span class="line">        &quot;id&quot;: 4</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &quot;table&quot;: &quot;testexample&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;ts&quot;: 1614051395373,</span><br><span class="line"></span><br><span class="line">    &quot;type&quot;: &quot;DELETE&quot;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    &quot;data&quot;: &#123;</span><br><span class="line"></span><br><span class="line">        &quot;id&quot;: &quot;19&quot;,</span><br><span class="line"></span><br><span class="line">        &quot;desc&quot;: &quot;dsadasd&quot;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &quot;database&quot;: &quot;abm_test&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;es&quot;: 1614051363000,</span><br><span class="line"></span><br><span class="line">    &quot;isDdl&quot;: false,</span><br><span class="line"></span><br><span class="line">    &quot;old&quot;: &#123;</span><br><span class="line"></span><br><span class="line">        &quot;desc&quot;: &quot;fdsf&quot;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &quot;pkNames&quot;: [</span><br><span class="line"></span><br><span class="line">        &quot;id&quot;</span><br><span class="line"></span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    &quot;sqlType&quot;: &#123;</span><br><span class="line"></span><br><span class="line">        &quot;desc&quot;: 12,</span><br><span class="line"></span><br><span class="line">        &quot;id&quot;: 4</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &quot;table&quot;: &quot;testexample&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;ts&quot;: 1614051363635,</span><br><span class="line"></span><br><span class="line">    &quot;type&quot;: &quot;UPDATE&quot;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="DDL-Create-Alter-Erase-Truncate-Rename-Cindex-Dindex"><a href="#DDL-Create-Alter-Erase-Truncate-Rename-Cindex-Dindex" class="headerlink" title="DDL(Create,Alter,Erase,Truncate,Rename,Cindex,Dindex)"></a>DDL(Create,Alter,Erase,Truncate,Rename,Cindex,Dindex)</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    &quot;database&quot;:&quot;abm_test&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;es&quot;:1613721642000,</span><br><span class="line"></span><br><span class="line">    &quot;isDdl&quot;:true,</span><br><span class="line"></span><br><span class="line">    &quot;sql&quot;:&quot;alter table testexample add column desc11 varchar(50) not null&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;table&quot;:&quot;testexample&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;ts&quot;:1613722063128,</span><br><span class="line"></span><br><span class="line">    &quot;type&quot;:&quot;ALTER&quot;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>消息实体</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br></pre></td><td class="code"><pre><span class="line">public class FlatMessage implements Serializable &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private static final long         serialVersionUID = -3386650678735860050L;</span><br><span class="line"></span><br><span class="line">    private Long                      id;</span><br><span class="line"></span><br><span class="line">    private String                    database;</span><br><span class="line"></span><br><span class="line">    private String                    table;</span><br><span class="line"></span><br><span class="line">    private List&lt;String&gt; pkNames;</span><br><span class="line"></span><br><span class="line">    private Boolean                   isDdl;</span><br><span class="line"></span><br><span class="line">    private String                    type;</span><br><span class="line"></span><br><span class="line">    // binlog executeTime</span><br><span class="line"></span><br><span class="line">    private Long                      es;</span><br><span class="line"></span><br><span class="line">    // dml build timeStamp</span><br><span class="line"></span><br><span class="line">    private Long                      ts;</span><br><span class="line"></span><br><span class="line">    private String                    sql;</span><br><span class="line"></span><br><span class="line">    private Map&lt;String, Integer&gt; sqlType;</span><br><span class="line"></span><br><span class="line">    private Map&lt;String, String&gt;       mysqlType;</span><br><span class="line"></span><br><span class="line">    private Map&lt;String, String&gt; data;</span><br><span class="line"></span><br><span class="line">    private Map&lt;String, String&gt; old;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public FlatMessage() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public FlatMessage(long id)&#123;</span><br><span class="line"></span><br><span class="line">        this.id = id;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Long getId() &#123;</span><br><span class="line"></span><br><span class="line">        return id;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setId(Long id) &#123;</span><br><span class="line"></span><br><span class="line">        this.id = id;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public String getDatabase() &#123;</span><br><span class="line"></span><br><span class="line">        return database;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setDatabase(String database) &#123;</span><br><span class="line"></span><br><span class="line">        this.database = database;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public String getTable() &#123;</span><br><span class="line"></span><br><span class="line">        return table;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setTable(String table) &#123;</span><br><span class="line"></span><br><span class="line">        this.table = table;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public List&lt;String&gt; getPkNames() &#123;</span><br><span class="line"></span><br><span class="line">        return pkNames;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void addPkName(String pkName) &#123;</span><br><span class="line"></span><br><span class="line">        if (this.pkNames == null) &#123;</span><br><span class="line"></span><br><span class="line">            this.pkNames = Lists.newArrayList();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        this.pkNames.add(pkName);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setPkNames(List&lt;String&gt; pkNames) &#123;</span><br><span class="line"></span><br><span class="line">        this.pkNames = pkNames;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Boolean getIsDdl() &#123;</span><br><span class="line"></span><br><span class="line">        return isDdl;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setIsDdl(Boolean isDdl) &#123;</span><br><span class="line"></span><br><span class="line">        this.isDdl = isDdl;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public String getType() &#123;</span><br><span class="line"></span><br><span class="line">        return type;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setType(String type) &#123;</span><br><span class="line"></span><br><span class="line">        this.type = type;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Long getTs() &#123;</span><br><span class="line"></span><br><span class="line">        return ts;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setTs(Long ts) &#123;</span><br><span class="line"></span><br><span class="line">        this.ts = ts;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public String getSql() &#123;</span><br><span class="line"></span><br><span class="line">        return sql;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setSql(String sql) &#123;</span><br><span class="line"></span><br><span class="line">        this.sql = sql;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Map&lt;String, Integer&gt; getSqlType() &#123;</span><br><span class="line"></span><br><span class="line">        return sqlType;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setSqlType(Map&lt;String, Integer&gt; sqlType) &#123;</span><br><span class="line"></span><br><span class="line">        this.sqlType = sqlType;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Map&lt;String, String&gt; getMysqlType() &#123;</span><br><span class="line"></span><br><span class="line">        return mysqlType;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setMysqlType(Map&lt;String, String&gt; mysqlType) &#123;</span><br><span class="line"></span><br><span class="line">        this.mysqlType = mysqlType;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Map&lt;String, String&gt; getData() &#123;</span><br><span class="line"></span><br><span class="line">        return data;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setData(Map&lt;String, String&gt; data) &#123;</span><br><span class="line"></span><br><span class="line">        this.data = data;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Map&lt;String, String&gt; getOld() &#123;</span><br><span class="line"></span><br><span class="line">        return old;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setOld(Map&lt;String, String&gt; old) &#123;</span><br><span class="line"></span><br><span class="line">        this.old = old;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public Long getEs() &#123;</span><br><span class="line"></span><br><span class="line">        return es;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void setEs(Long es) &#123;</span><br><span class="line"></span><br><span class="line">        this.es = es;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line"></span><br><span class="line">    public String toString() &#123;</span><br><span class="line"></span><br><span class="line">        return &quot;FlatMessage [id=&quot; + id + &quot;, database=&quot; + database + &quot;, table=&quot; + table + &quot;, isDdl=&quot; + isDdl + &quot;, type=&quot;</span><br><span class="line"></span><br><span class="line">                + type + &quot;, es=&quot; + es + &quot;, ts=&quot; + ts + &quot;, sql=&quot; + sql + &quot;, sqlType=&quot; + sqlType + &quot;, mysqlType=&quot;</span><br><span class="line"></span><br><span class="line">                + mysqlType + &quot;, data=&quot; + data + &quot;, old=&quot; + old + &quot;]&quot;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="type-枚举"><a href="#type-枚举" class="headerlink" title="type 枚举"></a>type 枚举</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"></span><br><span class="line">  * Insert row.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> INSERT(&quot;I&quot;),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"></span><br><span class="line">  * Update row.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> UPDATE(&quot;U&quot;),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"></span><br><span class="line">  * Delete row.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> DELETE(&quot;D&quot;),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"></span><br><span class="line">  * Create table.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> CREATE(&quot;C&quot;),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"></span><br><span class="line">  * Alter table.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> ALTER(&quot;A&quot;),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"></span><br><span class="line">  * Erase table.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> ERASE(&quot;E&quot;),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"></span><br><span class="line">  * Query.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> QUERY(&quot;Q&quot;),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"></span><br><span class="line">  * Truncate.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> TRUNCATE(&quot;T&quot;),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"></span><br><span class="line">  * rename.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> RENAME(&quot;R&quot;),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"></span><br><span class="line">  * create index.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> CINDEX(&quot;CI&quot;),</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> /**</span><br><span class="line"></span><br><span class="line">  * drop index.</span><br><span class="line"></span><br><span class="line">  */</span><br><span class="line"></span><br><span class="line"> DINDEX(&quot;DI&quot;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="sqlType类型"><a href="#sqlType类型" class="headerlink" title="sqlType类型"></a>sqlType类型</h4><p>java.sql.Types</p>
+<h4 id="pkNames"><a href="#pkNames" class="headerlink" title="pkNames"></a>pkNames</h4><p>主键名</p>
+<h3 id="3、幂等校验"><a href="#3、幂等校验" class="headerlink" title="3、幂等校验"></a>3、幂等校验</h3><p>注意：消息有可能会重复投递，请保证幂等校验</p>
+<p>建议变更增加 gmt_modified 字段  毫秒级 </p>
+<p>通过 主键 和 gmt_modified 字段来进行幂等校验</p>
+<p>幂等组件接入</p>
+<p><a target="_blank" rel="noopener" href="http://git.idanchuang.net/arch/spring-cloud-parent-all/tree/master/components/component-gauss">http://git.idanchuang.net/arch/spring-cloud-parent-all/tree/master/components/component-gauss</a></p>
+<h3 id="4、kafka配置"><a href="#4、kafka配置" class="headerlink" title="4、kafka配置"></a>4、kafka配置</h3><p>去对应kafka控制台查找对应库表消息即可，默认topic名字为 “rds_” + 数据库名 + “_” + 数据表名</p>
+<p>例子：rds_item_center库 w_goods_statistics表 生成topic名 rds_item_center_w_goods_statistics</p>
+<p>测试环境</p>
+<p><a target="_blank" rel="noopener" href="https://console.huaweicloud.com/dms/?region=cn-east-3&amp;engine=kafka#/queue/manager/newKafkaDetail/baseInfo?id=c71cde67-38c2-4b09-9fee-14d8cc905d7d">https://console.huaweicloud.com/dms/?region=cn-east-3&amp;engine=kafka#/queue/manager/newKafkaDetail/baseInfo?id=c71cde67-38c2-4b09-9fee-14d8cc905d7d</a></p>
+<p>10.70.20.228:9092,10.70.21.137:9092,10.70.20.238:9092</p>
+<p>生产环境</p>
+<p><a target="_blank" rel="noopener" href="https://console.huaweicloud.com/dms/?region=cn-east-3&amp;engine=kafka#/queue/manager/newKafkaDetail/baseInfo?id=0f9b3370-8486-4ce1-813f-1ccd3fdc8f15">https://console.huaweicloud.com/dms/?region=cn-east-3&amp;engine=kafka#/queue/manager/newKafkaDetail/baseInfo?id=0f9b3370-8486-4ce1-813f-1ccd3fdc8f15</a></p>
+<p>10.100.20.253:9092,10.100.21.103:9092,10.100.20.133:9092</p>
+<h3 id="5、示例代码"><a href="#5、示例代码" class="headerlink" title="5、示例代码"></a>5、示例代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">spring.kafka.bootstrap-servers = 10.70.20.228:9092,10.70.21.137:9092,10.70.20.238:9092</span><br><span class="line"></span><br><span class="line">spring.kafka.consumer.group-id = dtx-task</span><br><span class="line"></span><br><span class="line">spring.kafka.consumer.key-deserializer = org.apache.kafka.common.serialization.StringDeserializer</span><br><span class="line"></span><br><span class="line">spring.kafka.consumer.value-deserializer = org.apache.kafka.common.serialization.StringDeserializer</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;com.idanchuang.component&lt;/groupId&gt;</span><br><span class="line"></span><br><span class="line">    &lt;artifactId&gt;component-gauss&lt;/artifactId&gt;</span><br><span class="line"></span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;org.springframework.kafka&lt;/groupId&gt;</span><br><span class="line"></span><br><span class="line">    &lt;artifactId&gt;spring-kafka&lt;/artifactId&gt;</span><br><span class="line"></span><br><span class="line">    &lt;version&gt;2.2.0.RELEASE&lt;/version&gt;</span><br><span class="line"></span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br></pre></td><td class="code"><pre><span class="line">package com.idanchuang.project.basic.consumer;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">import com.alibaba.fastjson.JSONObject;</span><br><span class="line"></span><br><span class="line">import com.idanchuang.component.gauss.annotation.Idempotent;</span><br><span class="line"></span><br><span class="line">import org.apache.commons.lang.StringUtils;</span><br><span class="line"></span><br><span class="line">import org.apache.kafka.clients.consumer.ConsumerRecord;</span><br><span class="line"></span><br><span class="line">import org.springframework.kafka.annotation.KafkaListener;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"></span><br><span class="line"> * @Author: chac</span><br><span class="line"></span><br><span class="line"> * @PackageName: com.idanchuang.project.basic.consumer</span><br><span class="line"></span><br><span class="line"> * @ClassName: BinlogConsumer</span><br><span class="line"></span><br><span class="line"> * @Description:</span><br><span class="line"></span><br><span class="line"> * @Date: 2021/3/19 11:42 上午x</span><br><span class="line"></span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line"> @Component</span><br><span class="line"></span><br><span class="line">public class BinlogConsumer &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    @KafkaListener(</span><br><span class="line"></span><br><span class="line">            topics = &quot;#&#123;&#x27;$&#123;kafka.listener.topics.topic.name&#125;&#x27;.split(&#x27;,&#x27;)&#125;&quot;,</span><br><span class="line"></span><br><span class="line">            errorHandler = &quot;errorHandler&quot;</span><br><span class="line"></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    public void listener(ConsumerRecord&lt;String, String&gt; record)</span><br><span class="line"></span><br><span class="line">            throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        String kafkaMessage = record.value();</span><br><span class="line"></span><br><span class="line">        if (StringUtils.isEmpty(kafkaMessage)) &#123;</span><br><span class="line"></span><br><span class="line">            return;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        FlatMessage flatMessage = JSONObject.parseObject(kafkaMessage, FlatMessage.class);</span><br><span class="line"></span><br><span class="line">        if (flatMessage == null) &#123;</span><br><span class="line"></span><br><span class="line">            return;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (flatMessage.getIsDdl()) &#123;</span><br><span class="line"></span><br><span class="line">            return;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        String idempotentKey = flatMessage.getDatabase() + &quot;-&quot; + flatMessage.getTable() + &quot;-&quot; + flatMessage.getType() + &quot;-&quot;;</span><br><span class="line"></span><br><span class="line">        String primaryKey = flatMessage.getPkNames().get(0);</span><br><span class="line"></span><br><span class="line">        switch (flatMessage.getType()) &#123;</span><br><span class="line"></span><br><span class="line">            case &quot;DELETE&quot;:</span><br><span class="line"></span><br><span class="line">                idempotentKey += flatMessage.getData().get(primaryKey) + &quot;-&quot; + flatMessage.getEs();</span><br><span class="line"></span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            case &quot;INSERT&quot;:</span><br><span class="line"></span><br><span class="line">            case &quot;UPDATE&quot;:</span><br><span class="line"></span><br><span class="line">                idempotentKey += flatMessage.getData().get(primaryKey) + &quot;-&quot; + flatMessage.getData().get(&quot;gmt_modified&quot;);</span><br><span class="line"></span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            default:</span><br><span class="line"></span><br><span class="line">                idempotentKey = &quot;&quot;;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (StringUtils.isEmpty(idempotentKey)) &#123;</span><br><span class="line"></span><br><span class="line">            return;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        run(flatMessage, idempotentKey);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line"></span><br><span class="line">     * 幂等组件保证幂等，详细可看文档</span><br><span class="line"></span><br><span class="line">     * &lt;/&gt;http://git.idanchuang.net/arch/spring-cloud-parent-all/tree/master/components/component-gauss</span><br><span class="line"></span><br><span class="line">     * @param flatMessage</span><br><span class="line"></span><br><span class="line">     * @param idempotentKey</span><br><span class="line"></span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    @Idempotent(spelKey = &quot;idempotentKey&quot;, expireTime = 86400)</span><br><span class="line"></span><br><span class="line">    public void run(FlatMessage flatMessage, String idempotentKey) &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        switch (flatMessage.getType()) &#123;</span><br><span class="line"></span><br><span class="line">            case &quot;INSERT&quot;:</span><br><span class="line"></span><br><span class="line">                // TODO 业务逻辑处理</span><br><span class="line"></span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            case &quot;UPDATE&quot;:</span><br><span class="line"></span><br><span class="line">                // TODO 业务逻辑处理</span><br><span class="line"></span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            case &quot;DELETE&quot;:</span><br><span class="line"></span><br><span class="line">                // TODO 业务逻辑处理</span><br><span class="line"></span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/07/15/%E3%80%90Mybatis-Plus%E3%80%91%E4%B8%AD%E6%9B%B4%E6%96%B0%E5%AD%97%E6%AE%B5%E5%80%BC%E4%B8%BAnull%E7%9A%84%E9%97%AE%E9%A2%98/" rel="next" title="【Mybatis-Plus】中更新字段值为null的问题">
+                <i class="fa fa-chevron-left"></i> 【Mybatis-Plus】中更新字段值为null的问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/08/10/%E9%93%BE%E8%A1%A8%E4%B8%93%E9%A2%98/" rel="prev" title="链表专题">
+                链表专题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar1.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MRTFrank" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhaobin@accesscorporate.com.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://baidu.com/" title="百度一下" target="_blank">百度一下</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://ffis.me/" title="饭饭学姐" target="_blank">饭饭学姐</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leetcode-cn.com/problemset/all/" title="LeetCode" target="_blank">LeetCode</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.bilibili.com/" title="哔哩哔哩" target="_blank">哔哩哔哩</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://springlearn.cn/" title="程序员升级课" target="_blank">程序员升级课</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81OA-gt-%E7%A0%94%E5%8F%91%E4%B8%AD%E5%BF%83-gt-binlog%E7%9B%91%E5%90%AC%E7%94%B3%E8%AF%B7-%E6%8F%90%E4%BA%A4OA%E5%AE%A1%E6%89%B9%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">1、OA-&gt;研发中心-&gt;binlog监听申请 提交OA审批流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E7%9B%91%E5%90%AC%E5%88%86%E9%85%8D%E7%9A%84topic%E5%8D%B3%E5%8F%AF"><span class="nav-number">2.</span> <span class="nav-text">2、监听分配的topic即可</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#insert"><span class="nav-number">2.1.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#delete"><span class="nav-number">2.2.</span> <span class="nav-text">delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Update"><span class="nav-number">2.3.</span> <span class="nav-text">Update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DDL-Create-Alter-Erase-Truncate-Rename-Cindex-Dindex"><span class="nav-number">2.4.</span> <span class="nav-text">DDL(Create,Alter,Erase,Truncate,Rename,Cindex,Dindex)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#type-%E6%9E%9A%E4%B8%BE"><span class="nav-number">2.5.</span> <span class="nav-text">type 枚举</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sqlType%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.6.</span> <span class="nav-text">sqlType类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pkNames"><span class="nav-number">2.7.</span> <span class="nav-text">pkNames</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E5%B9%82%E7%AD%89%E6%A0%A1%E9%AA%8C"><span class="nav-number">3.</span> <span class="nav-text">3、幂等校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81kafka%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">4、kafka配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E7%A4%BA%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">5、示例代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Abina</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("07/01/2021 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'wP6SICEifS2ACUzAS0y6pvU4-gzGzoHsz',
+        appKey: 'uk4ycsx9x3KDhKMthdaHKhig',
+        placeholder: '你想说点什么吗？',
+        avatar:'monsterid',
+        guest_info:guest,
+        pageSize:'4' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("wP6SICEifS2ACUzAS0y6pvU4-gzGzoHsz", "uk4ycsx9x3KDhKMthdaHKhig");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
